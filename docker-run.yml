@@ -1,0 +1,27 @@
+- hosts: all
+  become: True
+  tasks:
+    - name: Install docker 
+      yum:
+        name: docker
+        state: present
+    - name: Start and enable docker
+      service:
+        name: docker
+        state: started
+        enabled: True
+    - name: Install pip
+      yum:
+        name: python-pip
+        state: present
+    - name: install docker-py
+      pip:
+        name: docker-py
+        state: present
+    - name: Run node app container
+      docker_container:
+        name: nodeapp
+        image: kammana/nodeapp:v1
+        ports:
+                - "8080:1234"
+        state: present

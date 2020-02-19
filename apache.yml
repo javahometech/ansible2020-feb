@@ -15,3 +15,17 @@
         enabled: True
     - name: Put index.html on apache
       shell: echo  Welcome to Ansible > /var/www/html/index.html
+    
+    - name: Change defautl port of apache
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        insertafter: '^#Listen '
+        line: Listen 80
+      notify:
+        - restart apache
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
