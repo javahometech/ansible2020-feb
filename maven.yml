@@ -1,0 +1,22 @@
+- hosts: localhost
+  become: True
+  tasks:
+    - name: install pip
+      apt:
+        name: python-pip
+        state: present
+    - name: Install lxml
+      pip:
+        name: lxml
+        state: present
+        executable: pip
+    - name: Download war file from nexus
+      maven_artifact:
+        group_id: in.javahome
+        artifact_id: myweb
+        username: admin
+        password: admin123
+        extension: war
+        version: 8.4.0
+        repository_url: 'http://15.206.173.85:8081/repository/myapp-release/'
+        dest: ./myweb.war

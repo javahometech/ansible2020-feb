@@ -1,0 +1,11 @@
+---
+
+- hosts: localhost
+  become: True
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker
+        state: present
+
+...
