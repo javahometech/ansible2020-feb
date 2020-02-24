@@ -1,0 +1,21 @@
+---
+- name: Install apache
+  yum:
+    name: httpd
+    state: present
+- name: Start and enable Apache
+  service:
+    name: httpd
+    state: started
+    enabled: True
+- name: Copy index.html on apache server
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html
+- name: Configure default port for apache
+  template:
+    src: httpd.conf
+    dest: /etc/httpd/conf/httpd.conf
+  notify:
+    - restart apache
+

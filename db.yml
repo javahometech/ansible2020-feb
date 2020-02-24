@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  vars_files:
+    - db-vars.yml
+  tasks:
+    - name: Connect to DB
+      debug:
+        msg: "Connecting to DB with name {{user_name}} and password {{password}}"

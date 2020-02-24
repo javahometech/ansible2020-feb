@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  tasks:
+    - debug:
+        msg: "This is task-1"
+      tags:
+        - one
+    - debug:
+        msg: "This is task-2"
+      tags:
+        - two

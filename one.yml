@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Task one from playbook one
+      debug:
+        msg: "Hi playbook one"

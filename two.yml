@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Task one from playbook two
+      debug:
+        msg: "Hi playbook two"
+    - name: import task one
+      import_tasks: tasks-one.yml
+
+- name: Import playbook one
+  import_playbook: one.yml

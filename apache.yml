@@ -1,31 +1,7 @@
-- hosts: all
+---
+- hosts: webservers
   become: True
-  tasks:
-    - name: Install apache
-      yum:
-        name: httpd
-        state: present
-    - name: Start Apache
-      service:
-        name: httpd
-        state: started
-    - name: Enable Apache on Reboot
-      service:
-        name: httpd
-        enabled: True
-    - name: Put index.html on apache
-      shell: echo  Welcome to Ansible > /var/www/html/index.html
-    
-    - name: Change defautl port of apache
-      lineinfile:
-        path: /etc/httpd/conf/httpd.conf
-        regexp: '^Listen '
-        insertafter: '^#Listen '
-        line: Listen 80
-      notify:
-        - restart apache
-  handlers:
-    - name: restart apache
-      service:
-        name: httpd
-        state: restarted
+  roles:
+    - role: apache
+      vars:
+        apache_port: 90

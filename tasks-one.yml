@@ -1,0 +1,4 @@
+---
+- name: task one file
+  debug:
+    msg: This is from task one file
